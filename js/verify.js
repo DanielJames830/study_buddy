@@ -20,7 +20,7 @@ async function checkVerification() {
         return
     }
 
-    const url = "study-buddy-api.azurewebsites.net/user/verification"
+    const url = "https://study-buddy-api.azurewebsites.net/user/verification"
 
     const options = {
         method: "GET",
