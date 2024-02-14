@@ -1,38 +1,47 @@
-<!DOCTYPE html>
+<!DOCTYPE html >
 
+<html lang="en">
 <head>
+    <meta charset="UTF-8" />
     <link rel="stylesheet" href="css/styles.css">
+    <title>The Study Buddy</title>
 </head>
 
 <body>
-
     <h1>Welcome to Study Buddy!</h1>
     <p>Please create an account below.</p>
 
-    <div class="callout">
-        <h3>Create Account</h3>   
-        <label>username</label>
-        <input type="text" name="username" id="name" required>
-        <br>
-        <label>email</label>
-        <input type="text" name="email" id="email" required>
-        <br>
-        <label>password</label>
-        <input type="text" name="password" id="password" required>
-        <br>
-        <label>college</label>
-        <input type="text" name="college" id="college" required>
-        <br>
-        <label>major</label>
-        <input type="text" name="major" id="major">
-        
-        <br>
-        <br>
-
-        <button id="submitButton">
-            Submit
-        </button>
-    </div>
+    <form onsubmit="return false">
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" spellcheck="false" placeholder="Email" required>
+        </div>
+        <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" name="firstName" spellcheck="false" required>
+        </div>
+        <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" name="lastName" spellcheck="false" required>
+        </div>
+        <div class="form-group">
+            <label for="school">School</label>
+            <input type="text" id="school" name="school" spellcheck="false" required>
+        </div>
+        <div class="form-group">
+            <label for="major">Major</label>
+            <input type="text" id="major" name="major" spellcheck="false">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" spellcheck="false" placeholder="Password" required>
+        </div>
+        <div class="form-group">
+            <label for="reconfirm">Re-confirm Password</label>
+            <input type="password" id="reconfirm" name="reconfirm" spellcheck="false" placeholder="Email" required>
+        </div>
+        <button id="submitButton">Create Account</button>
+    </form>
 
     <script type="module" src="js/create_account.js"> </script>
 </body>

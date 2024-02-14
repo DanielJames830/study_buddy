@@ -8,14 +8,19 @@ document.querySelector("#submitButton").addEventListener("click", async () => {
 
     let body = {
         "email": document.getElementById('email').value,
-        "username":  document.getElementById('name').value,
+        "username":  document.getElementById('firstName').value + " " + document.getElementById('lastName').value,
         "password": document.getElementById('password').value,
-        "school":  document.getElementById('college').value,
+        "school":  document.getElementById('school').value,
         "majors": [
             document.getElementById('major').value
         ],
     }
+
+
+
     body = JSON.stringify(body)
+    console.log(body)
+    
     const options = {
         method: "POST",
         headers: { "Content-Type": "application/json" },
