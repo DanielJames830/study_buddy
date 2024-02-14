@@ -1,4 +1,4 @@
-async function checkVerification() {
+async function createAccount() {
     console.log('running checkVerification')
 
     const h1 = document.querySelector("h1")
@@ -54,4 +54,4 @@ async function checkVerification() {
     }
 }
 
-checkVerification()
+createAccount()
