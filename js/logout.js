@@ -20,8 +20,7 @@ document.querySelector("#logoutButton").addEventListener("click", async () => {
 	const options = {
         method: "PATCH",
         headers: {
-			"Content-Type": "application/json",
-            'Authorization': `Bearer ${token}`
+            Authorization: `Bearer ${token}`
         }
     }
 
