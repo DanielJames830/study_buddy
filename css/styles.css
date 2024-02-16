@@ -19,12 +19,14 @@ form {
 	background-color: #333333;
 	padding: 30px;
 	border-radius: 10px;
-	width: 300px;
+	width: 400px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .form-group {
-	margin-bottom: 20px;
+	margin-bottom: 10px;
+	margin-right: 5px;
+	margin-left: 5px;
 }
 
 label {
@@ -74,4 +76,31 @@ button {
 
 input[type="submit"]:hover {
 	background-color: #0056b3;
+}
+
+.error {
+	border: 1px solid red !important;
+}
+
+.errorMessage {
+	margin-top: 5px;
+	size: 12px;
+	color: red;
+}
+
+.sidebyside {
+	display: flex;
+}
+
+.tab {
+	display: none;
+  }
+
+.tab-link {
+	background-color: transparent;
+	display: inline-block;
+	color: rgb(93, 139, 219);
+	width: 30%;
+	text-align: start;
+	
 }
