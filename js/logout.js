@@ -10,19 +10,15 @@ document.querySelector("#logoutButton").addEventListener("click", async () => {
 
 	if (!token) {
         h1.innerHTML = "Something went wrong."
-        p.innerHTML = "Please click the link in the email that was sent to you."
 
         console.log("No token found")
-
-        setTimeout(() => {
-            location.href = "index.html"
-        }, 4000)
         return
     }
 
 	const options = {
-        method: "GET",
+        method: "PATCH",
         headers: {
+			"Content-Type": "application/json" ,
             Authorization: `Bearer ${token}`
         }
     }
