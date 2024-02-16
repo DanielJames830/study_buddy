@@ -29,6 +29,7 @@ document.querySelector("#logoutButton").addEventListener("click", async () => {
     if (response.status == 200) {
         console.log("Logout successful")
         localStorage.removeItem("token", token);
+		location.href("index.html");
     }
     else {
         h1.innerHTML = "Something went wrong."
