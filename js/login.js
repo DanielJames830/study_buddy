@@ -7,8 +7,8 @@ document.querySelector("#loginButton").addEventListener("click", async () => {
 	const p = document.querySelector("p");
 
 	let body = {
-		email: document.getElementById("email").value,	
-		password: document.getElementById("password").value,
+		email: document.getElementById("loginEmail").value,	
+		password: document.getElementById("loginPassword").value,
 	};
 
 	body = JSON.stringify(body);
