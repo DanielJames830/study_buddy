@@ -15,11 +15,13 @@ document.querySelector("#logoutButton").addEventListener("click", async () => {
         return
     }
 
+	console.log(token)
+
 	const options = {
         method: "PATCH",
         headers: {
-			"Content-Type": "application/json" ,
-            Authorization: `Bearer ${token}`
+			"Content-Type": "application/json",
+            'Authorization': `Bearer ${token}`
         }
     }
 
@@ -31,8 +33,5 @@ document.querySelector("#logoutButton").addEventListener("click", async () => {
     }
     else {
         h1.innerHTML = "Something went wrong."
-        setTimeout(() => {
-            location.href = "index.html"
-        }, 4000)
     }
 });
