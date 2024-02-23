@@ -35,7 +35,19 @@ label {
 }
 
 input[type="email"],
+input[type="number"],
 input[type="text"] {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #666666;
+	border-radius: 5px;
+	background-color: #444444;
+	color: #ffffff;
+	margin-top: 5px;
+	box-sizing: border-box;
+}
+
+select{
 	width: 100%;
 	padding: 10px;
 	border: 1px solid #666666;

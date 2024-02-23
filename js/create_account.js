@@ -1,4 +1,19 @@
 document.querySelector("#submitButton").addEventListener("click", async () => {
+	var password = document.getElementById("password").value;
+	var reconfirm = document.getElementById("reconfirm").value;
+    var errorMessage = document.getElementById("errorMessage");
+
+	if (password !== reconfirm) {
+		document.getElementById("password").classList.add("error");
+		document.getElementById("reconfirm").classList.add("error");
+        errorMessage.textContent = "passwords do not match";
+		return;
+	} else {
+        errorMessage.textContent = "";
+		document.getElementById("password").classList.remove("error");
+		document.getElementById("reconfirm").classList.remove("error");
+	}
+
 	console.log("creating user");
 
 	const url = "https://study-buddy-api.azurewebsites.net/user/";

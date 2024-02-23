@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="css/styles.css">
+    <title>The Study Buddy</title>
+
+</head>
+
+<body>
+
+    <h1>Create Study Group</h1>
+    <p>Fill out form below</p>
+
+    <div class="tab-container">
+        <div id="groupTab" class="tab">
+            <form onsubmit="return false">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="groupName" name="groupName" spellcheck="false" placeholder="Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="isPublic">Public?</label>
+                    <input type="checkbox" id="isPublic" name="isPublic" placeholder="true">
+                </div>
+                <div class="form-group">
+                    <label for="maxParticipants">Maximum Participants</label>
+                    <input type="number" id="maxParticipants" name="maxParticipants" spellcheck="false" placeholder="8"
+                        required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <input type="text" id="description" name="description" spellcheck="false" placeholder="Description"
+                        required>
+                </div>
+
+                <div class="sidebyside">
+                    <div class="form-group">
+                        <label for="school">School</label>
+                        <input type="text" id="school" name="school" spellcheck="false" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="courseNumber">Course Number</label>
+                        <input type="text" id="courseNumber" name="courseNumber" spellcheck="false">
+                    </div>
+                </div>
+                <div class="sidebyside">
+                    <div class="form-group">
+                        <label for="dayOfWeek">Day of Week</label>
+                        <select name="dayOfWeek" id="dayOfWeek">
+                            <option value="Sunday">Sunday</option>
+                            <option value="Monday">Monday</option>
+                            <option value="Tuesday">Tuesday</option>
+                            <option value="Wednesday">Wednesday</option>
+                            <option value="Thursday">Thursday</option>
+                            <option value="Friday">Friday</option>
+                            <option value="Saturday">Saturday</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="timeOfDay">Time of Day (Military)</label>
+                        <input type="number" id="timeOfDay" name="timeOfDay" spellcheck="false" placeholder="8"
+                            required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="location">Location</label>
+                    <input type="text" id="location" name="location" spellcheck="false" placeholder="Location"
+                        required>
+                </div>
+                <br>
+                <button id="createGroupButton">Create</button>
+                <a href="main.html">Nevermind</a>
+            </form>
+        </div>
+    </div>
+
+    <script type="module" src="js/create_group.js"> </script>
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+
+            tabcontent = document.getElementsByClassName("tab");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+
+            tablinks = document.getElementsByClassName("tab-link");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+
+            document.getElementById(tabName).style.display = "block";
+
+            evt.currentTarget.className += " active";
+        }
+
+        document.getElementById("groupTab").style.display = "block";
+        document.getElementsByClassName("tab-link")[0].className += " active";
+
+    </script>
+</body>
+
+</html>
