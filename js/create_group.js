@@ -1,7 +1,7 @@
 document.querySelector("#createGroupButton").addEventListener("click", async () => {
 	console.log("creating study group");
 
-	const url = "https://study-buddy-api.azurewebsites.net/user/studygroup/";
+	const url = "https://study-buddy-api.azurewebsites.net/user/studygroup";
 
 	const h1 = document.querySelector("h1");
 	const p = document.querySelector("p");
