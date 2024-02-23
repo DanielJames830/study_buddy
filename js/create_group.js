@@ -1,3 +1,5 @@
+let meetingTimesArray = [];
+
 document.querySelector("#createGroupButton").addEventListener("click", async () => {
 	console.log("creating study group");
 
@@ -19,37 +21,40 @@ document.querySelector("#createGroupButton").addEventListener("click", async () 
 
     let body = {
 		name: document.getElementById("groupName").value,
-        owner: "65d613ffcd28d045217b017a",
-		is_public: document.getElementById("isPublic").value,
+		is_public: document.getElementById("isPublic").value === 'on' ? true : false,
         description: document.getElementById("description").value,
 		school: document.getElementById("school").value,
         course_number: document.getElementById('courseNumber').value,
         max_participants: document.getElementById('maxParticipants').value,
-        participants: [],
-        start_date: "2011-10-05T14:48:00.000Z",
-        end_date: "2011-10-05T14:48:00.000Z",
+        start_date: document.getElementById('start').value,
+        end_date: document.getElementById('end').value,
 		meeting_times: [
-            {
-               day: document.getElementById('dayOfWeek').value,
-               time: document.getElementById('timeOfDay').value + ":00",
-               location: document.getElementById('location').value
-            }
+            ...meetingTimesArray.map((x) => {
+                return {
+                    day: x.querySelector("#dayOfWeek_"+meetingTimesArray.indexOf(x)).value,
+                    time: x.querySelector("#timeOfDay_"+meetingTimesArray.indexOf(x)).value,
+                    location: x.querySelector("#location_"+meetingTimesArray.indexOf(x)).value
+                }
+            })
         ],
 	};
 
 	body = JSON.stringify(body);
 
+    console.log(body)
+
 	const options = {
         method: "POST",
         headers: {
-            Authorization: `Bearer ${token}`
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json'
         },
         body
     }
 
     let response = await fetch(url, options)
 
-    if (response.status == 200) {
+    if (response.status == 201) {
         console.log("Group creation successful")
 		location.href = "main.html";
     }
@@ -57,3 +62,35 @@ document.querySelector("#createGroupButton").addEventListener("click", async () 
         h1.innerHTML = "Something went wrong."
     }
 });
+
+
+document.querySelector("#addMeetingTime").addEventListener('click', async () => {
+  
+    const meetingTimesDiv = document.getElementById('meetingTimes');
+    const meetingTimeTemplate = document.getElementById('meetingTimeTemplate');
+  
+    const clonedMeetingTime = meetingTimeTemplate.cloneNode(true);
+    clonedMeetingTime.style.display = 'block'; 
+    meetingTimesDiv.appendChild(clonedMeetingTime);
+
+    const inputElements = clonedMeetingTime.querySelectorAll('input');
+    const selectorElements = clonedMeetingTime.querySelectorAll('select');
+
+    inputElements.forEach((input, index) => {
+        const currentId = input.id;
+        const newId = currentId + '_' + meetingTimesArray.length; 
+        input.id = newId;
+    });
+    selectorElements.forEach((input, index) => {
+        const currentId = input.id;
+        const newId = currentId + '_' + meetingTimesArray.length; 
+        input.id = newId;
+    });
+  
+    meetingTimesArray.push(clonedMeetingTime);
+
+
+    
+  
+});
+

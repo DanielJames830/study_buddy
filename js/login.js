@@ -23,7 +23,13 @@ document.querySelector("#loginButton").addEventListener("click", async () => {
 	let response = await fetch(url, options);
 
 	if (response.status == 200) {
-        location.href = "main.html"
+        
+		const data = await response.json()
+		console.log(data)
+		localStorage.setItem("token", data.token);
+
+		location.href = "main.html"
+
 	} else if (response.status == 401){
         h1.innerHTML = "Something went wrong.";
 		p.innerHTML = "This account has not been verified!";
