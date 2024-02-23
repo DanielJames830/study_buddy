@@ -18,7 +18,7 @@ document.querySelector("#createGroupButton").addEventListener("click", async () 
 	console.log(token)
 
     let body = {
-		name: document.getElementById("name").value,
+		name: document.getElementById("groupName").value,
 		is_public: document.getElementById("isPublic").value,
         description: document.getElementById("description").value,
 		school: document.getElementById("school").value,
