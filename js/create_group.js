@@ -49,9 +49,8 @@ document.querySelector("#createGroupButton").addEventListener("click", async () 
     let response = await fetch(url, options)
 
     if (response.status == 200) {
-        console.log("Logout successful")
-        localStorage.removeItem("token", token);
-		location.href = "index.html";
+        console.log("Group creation successful")
+		location.href = "main.html";
     }
     else {
         h1.innerHTML = "Something went wrong."
