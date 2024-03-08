@@ -39,7 +39,7 @@ async function createAccount() {
         localStorage.setItem("token", token);
 
         setTimeout(() => {
-            location.href = "main.html"
+            location.href = "home.html"
         }, 4000)
     }
     else {

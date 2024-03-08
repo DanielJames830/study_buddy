@@ -28,7 +28,7 @@ document.querySelector("#loginButton").addEventListener("click", async () => {
 		console.log(data)
 		localStorage.setItem("token", data.token);
 
-		location.href = "main.html"
+		location.href = "home.html"
 
 	} else if (response.status == 401){
         h1.innerHTML = "Something went wrong.";

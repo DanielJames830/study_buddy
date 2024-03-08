@@ -1,26 +1,309 @@
 <!DOCTYPE html>
-
 <html lang="en">
 
 <head>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="css/styles.css">
     <title>The Study Buddy</title>
-   
 </head>
 
 <body>
-    <script type="module" src="js/paralax.js"> </script>
-    <main>
-        <div class="paralaxBackdrop">
-            <div class="floater">
-                <h1>Welcome to Study Buddy</h1>
+    <div class="sidenav">
+        <!-- Updated Links for the side navigation bar -->
+        <a id="newGroupLink" href="javascript:void(0);" onclick="changeContent('newGroup')">New Group</a>
+        <a id="searchGroupsLink" href="javascript:void(0);" onclick="changeContent('searchGroups')">Search Groups</a>
+
+        <button class="logout-button" id="logoutButton">Logout</button>
+    </div>
+
+    <div class="main">
+        <!-- Separate divs for each content section, initially hidden except the first one -->
+        <div id="welcomeSection" style="display: block;">
+            <h1>Welcome to My Web App</h1>
+            <p>This is the main content of your web app.</p>
+        </div>
+        <div id="newGroup" style="display: none;">
+
+            <form onsubmit="return false">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="groupName" name="groupName" spellcheck="false" placeholder="Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="isPublic">Public?</label>
+                    <input type="checkbox" id="isPublic" name="isPublic" placeholder="true">
+                </div>
+                <div class="form-group">
+                    <label for="maxParticipants">Maximum Participants</label>
+                    <input type="number" id="maxParticipants" name="maxParticipants" spellcheck="false" placeholder="8"
+                        required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <input type="text" id="description" name="description" spellcheck="false" placeholder="Description"
+                        required>
+                </div>
+
+                <div class="sidebyside">
+                    <div class="form-group">
+                        <label for="start">Start date</label>
+                        <input type="date" id="start" name="start" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="end">End date</label>
+                        <input type="date" id="end" name="start" required>
+                    </div>
+                </div>
+
+                <div class="sidebyside">
+                    <div class="form-group">
+                        <label for="school">School</label>
+                        <input type="text" id="school" name="school" spellcheck="false" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="courseNumber">Course Number</label>
+                        <input type="text" id="courseNumber" name="courseNumber" spellcheck="false">
+                    </div>
+                </div>
+                <button type="button" class="meetingTimeButton" id="addMeetingTime">New Meeting Time</button>
+                <div id="meetingTimes">
+                    <div id="meetingTimeTemplate" style="display: none;">
+                        <div class="meetingTime">
+                            <div class="sidebyside">
+                                <div class="form-group">
+                                    <label for="dayOfWeek">Day of Week</label>
+                                    <select name="dayOfWeek" id="dayOfWeek">
+                                        <option value="Sunday">Sunday</option>
+                                        <option value="Monday">Monday</option>
+                                        <option value="Tuesday">Tuesday</option>
+                                        <option value="Wednesday">Wednesday</option>
+                                        <option value="Thursday">Thursday</option>
+                                        <option value="Friday">Friday</option>
+                                        <option value="Saturday">Saturday</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="timeOfDay">Time of Day (Military)</label>
+                                    <input type="time" id="timeOfDay" name="timeOfDay" spellcheck="false"
+                                        placeholder="8" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="location">Location</label>
+                                <input type="text" id="location" name="location" spellcheck="false"
+                                    placeholder="Location" required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <br>
+                <button id="createGroupButton">Create</button>
+                <a href="home.html">Nevermind</a>
+            </form>
+
+        </div>
+        <div id="searchGroups" style="display: none;">
+            <div class="sidebyside">
+                <div class="searchFields">
+                    <form onsubmit="return false" id="studyGroupForm">
+                        <div class="form-group">
+                            <label for="search">Search:</label>
+                            <input type="text" id="search" name="search">
+                        </div>
+
+
+                        <div class="sidebyside">
+                            <div class="form-group">
+                                <label>Ongoing</label>
+                                <input type="checkbox" id="ongoing" name="ongoing" value="true">
+                            </div>
+                            <div class="form-group">
+                                <label>Public</label>
+                                <input type="checkbox" id="isPublic" name="is_public" value="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="sortBy">Sort By:</label>
+                            <select id="sortBy" name="sortBy">
+                                <option value="start_date:asc">Start Date (Ascending)</option>
+                                <option value="start_date:desc">Start Date (Descending)</option>
+                                <option value="end_date:asc">End Date (Ascending)</option>
+                                <option value="end_date:desc">End Date (Descending)</option>
+                            </select>
+                        </div>
+
+                        <div class="sidebyside">
+                            <div class="form-group">
+                                <label for="limit">Limit:</label>
+                                <input type="number" id="limit" name="limit" min="1">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="skip">Skip:</label>
+                                <input type="number" id="skip" name="skip" min="0">
+                            </div>
+                        </div>
+
+                        <button>Search</button>
+                    </form>
+                </div>
+                <div>
+                    <div class="searchResults" id="results">
+
+                    </div>
+                    <div id="pagination">
+                        <button id="prevButton">Previous</button>
+                        <button id="nextButton">Next</button>
+                    </div>
+                </div>
             </div>
+
+
+
+            <script>
+                let skip = 0;
+
+                document.getElementById('studyGroupForm').addEventListener('submit', async function (event) {
+                    event.preventDefault();
+                    skip = 0;
+
+                    await fetchStudyGroups();
+                });
+
+
+
+                document.getElementById('prevButton').addEventListener('click', async function (event) {
+                
+                    event.preventDefault();
+
+                    const form = document.getElementById('studyGroupForm');
+                    const formData = new FormData(form);
+                    skip = Number(skip) - Number(formData.get('skip'));
+                    if (skip < 0) {
+                        skip = 0;
+                    }
+                    console.log(skip);
+                    await fetchStudyGroups();
+                });
+
+                document.getElementById('nextButton').addEventListener('click', async function (event) {
+                    event.preventDefault();
+                    const form = document.getElementById('studyGroupForm');
+                    const formData = new FormData(form);
+                    skip = Number(skip) + Number(formData.get('skip'));
+                    console.log(skip);
+                    await fetchStudyGroups();
+                });
+
+
+
+                async function fetchStudyGroups() {
+
+
+                    const form = document.getElementById('studyGroupForm');
+                    const formData = new FormData(form);
+                    const searchParams = new URLSearchParams();
+
+                    // Iterate through form data and add non-empty values to searchParams
+                    formData.forEach((value, key) => {
+                        if (value !== '' && key !== 'skip') {
+                            searchParams.append(key, value);
+                        }
+
+                        searchParams.append('skip', skip)
+                    });
+
+                    const token = localStorage.getItem("token");
+
+                    if (!token) {
+                        h1.innerHTML = "Something went wrong."
+
+                        console.log("No token found")
+                        return
+                    }
+                    const url = `https://study-buddy-api.azurewebsites.net/studygroups?${searchParams}`;
+                    console.log(url);
+                    try {
+                        const response = await fetch(url, {
+                            method: 'GET',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Authorization': `Bearer ${token}` // Replace <token> with your actual token
+                            }
+                        });
+
+                        if (!response.ok) {
+                            throw new Error('Failed to fetch study groups');
+                        }
+
+                        const data = await response.json();
+                        displayResults(data);
+                    } catch (error) {
+                        console.error('Error:', error);
+                    }
+                };
+
+                function displayResults(results) {
+                    const resultsContainer = document.getElementById('results');
+                    resultsContainer.innerHTML = ''; // Clear previous results
+
+                    if (results.length === 0) {
+                        resultsContainer.textContent = 'No study groups found.';
+                        return;
+                    }
+
+                    const div = document.createElement('div');
+                    results.forEach(studyGroup => {
+                        const resultCard = document.createElement('div');
+                        resultCard.classList.add('resultCard');
+
+                        const nameHeading = document.createElement('h1');
+                        nameHeading.textContent = studyGroup.name;
+
+                        const startDate = new Date(studyGroup.start_date).toLocaleDateString();
+                        const endDate = new Date(studyGroup.end_date).toLocaleDateString();
+                        const dateRange = document.createElement('p');
+                        dateRange.textContent = `${startDate} - ${endDate}`;
+
+
+
+                        const descriptionPara = document.createElement('p');
+                        descriptionPara.textContent = studyGroup.description;
+
+                        resultCard.appendChild(nameHeading);
+                        resultCard.appendChild(dateRange);
+
+                        resultCard.appendChild(descriptionPara);
+
+                        resultsContainer.appendChild(resultCard);
+                    });
+                    resultsContainer.appendChild(div);
+                }
+            </script>
         </div>
-        <div class="contentBlock">
-            <h1>Made For Students, By Students.</h1>
-        </div>
-    </main>
+
+        <script>
+            // Function to toggle content based on the selected link
+            function changeContent(selectedSectionId) {
+                // Hide all sections
+                document.querySelectorAll('.main > div').forEach(section => {
+                    section.style.display = 'none';
+                });
+
+                // Show the selected section
+                document.getElementById(selectedSectionId).style.display = 'block';
+
+                // Update the active link styling
+                document.querySelectorAll('.sidenav a').forEach(link => {
+                    link.classList.remove('active');
+                });
+                document.getElementById(selectedSectionId + 'Link').classList.add('active');
+            }
+        </script>
+        <script type="module" src="js/logout.js"></script>
+        <script type="module" src="js/create_group.js"> </script>
 </body>
 
 </html>

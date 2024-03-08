@@ -56,7 +56,7 @@ document.querySelector("#createGroupButton").addEventListener("click", async () 
 
     if (response.status == 201) {
         console.log("Group creation successful")
-		location.href = "main.html";
+		location.href = "home.html";
     }
     else {
         h1.innerHTML = "Something went wrong."
