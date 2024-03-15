@@ -289,7 +289,7 @@ document.querySelector("#saveGroupButton").addEventListener("click", async () =>
 
     let body = {
 		name: form.querySelector('#groupName').value,
-		is_public: form.querySelector('#isPublic').value === 'on' ? true : false,
+		is_public: form.querySelector('#isPublic').checked,
         description: form.querySelector('#description').value,
 		school: form.querySelector('#school').value,
         course_number: form.querySelector('#courseNumber').value,
