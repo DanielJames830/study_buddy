@@ -116,114 +116,84 @@ function displayResults(results) {
 	resultsContainer.appendChild(div);
 }
 
-
 let meetingTimesArray = [];
 function showModal(studyGroup) {
-    const userId = localStorage.getItem("id");
-    
-	const modal = document.getElementById("myModal");
-    modal.value = studyGroup._id;
+	const userId = localStorage.getItem("id");
 
-    if(userId == studyGroup.owner) {
-        const button = modal.querySelector("#edit-button");
-        button.style.display = "block";
+	const modal = document.getElementById("myModal");
+	modal.value = studyGroup._id;
+
+	if (userId == studyGroup.owner) {
+		const button = modal.querySelector("#edit-button");
+		button.style.display = "block";
 
 		button.addEventListener("click", function () {
-            meetingTimesArray = [];
-            modal.querySelector('#read-only').style.display = "none";
-            const form = modal.querySelector('#edit-form');
+			meetingTimesArray = [];
+			modal.querySelector("#read-only").style.display = "none";
+			const form = modal.querySelector("#edit-form");
 
-            form.querySelector('#meetingTimes').innerHTML = '';
+			form.querySelector("#meetingTimes").innerHTML = "";
 
-            form.style.display = "block";
+			form.style.display = "block";
 
-            const nameField = form.querySelector('#groupName');
-            nameField.value = studyGroup.name;
+			const nameField = form.querySelector("#groupName");
+			nameField.value = studyGroup.name;
 
-            const isPublicField = form.querySelector('#isPublic');
-            isPublicField.checked = studyGroup.is_public;
+			const isPublicField = form.querySelector("#isPublic");
+			isPublicField.checked = studyGroup.is_public;
 
-            const maxParticipants = form.querySelector('#maxParticipants');
-            maxParticipants.value = studyGroup.max_participants;
+			const maxParticipants = form.querySelector("#maxParticipants");
+			maxParticipants.value = studyGroup.max_participants;
 
-            const description = form.querySelector('#description');
-            description.value = studyGroup.description;
+			const description = form.querySelector("#description");
+			description.value = studyGroup.description;
 
-            const startDate = form.querySelector('#start');
-            startDate.value = studyGroup.start_date.substring(0,10);
+			const startDate = form.querySelector("#start");
+			startDate.value = studyGroup.start_date.substring(0, 10);
 
-            const endDate = form.querySelector('#end');
-            endDate.value = studyGroup.end_date.substring(0,10);
+			const endDate = form.querySelector("#end");
+			endDate.value = studyGroup.end_date.substring(0, 10);
 
-            const schoolField = form.querySelector('#school');
-            schoolField.value = studyGroup.school;
+			const schoolField = form.querySelector("#school");
+			schoolField.value = studyGroup.school;
 
-            const courseNumberField = form.querySelector('#courseNumber');
-            courseNumberField.value = studyGroup.course_number;
+			const courseNumberField = form.querySelector("#courseNumber");
+			courseNumberField.value = studyGroup.course_number;
 
-            studyGroup.meeting_times.forEach(x => {
-                const meetingTimesDiv = form.querySelector('#meetingTimes');
-                const meetingTimeTemplate = form.querySelector('#meetingTimeTemplate');
+			studyGroup.meeting_times.forEach((x) => {
+				const meetingTimesDiv = form.querySelector("#meetingTimes");
+				const meetingTimeTemplate = form.querySelector("#meetingTimeTemplate");
 
-                const clonedMeetingTime = meetingTimeTemplate.cloneNode(true);
-                clonedMeetingTime.style.display = 'block'; 
-                meetingTimesDiv.appendChild(clonedMeetingTime);
-            
-                const inputElements = clonedMeetingTime.querySelectorAll('input');
-                const selectorElements = clonedMeetingTime.querySelectorAll('select');
-            
-                inputElements.forEach((input, index) => {
-                    const currentId = input.id;
-                    const newId = currentId + '_' + meetingTimesArray.length; 
-                    //input.id = newId;
-                    input.value = x[currentId];
-                });
-                selectorElements.forEach((input, index) => {
-                    const currentId = input.id;
-                    const newId = currentId + '_' + meetingTimesArray.length; 
-                   // input.id = newId;
-                    input.value = x[currentId];
-                });
+				const clonedMeetingTime = meetingTimeTemplate.cloneNode(true);
+				clonedMeetingTime.style.display = "block";
+				meetingTimesDiv.appendChild(clonedMeetingTime);
 
+				const inputElements = clonedMeetingTime.querySelectorAll("input");
+				const selectorElements = clonedMeetingTime.querySelectorAll("select");
 
-              
-                meetingTimesArray.push(clonedMeetingTime);
-            });
+				inputElements.forEach((input, index) => {
+					const currentId = input.id;
+					const newId = currentId + "_" + meetingTimesArray.length;
+					input.id = newId;
+					input.value = x[currentId];
+				});
+				selectorElements.forEach((input, index) => {
+					const currentId = input.id;
+					const newId = currentId + "_" + meetingTimesArray.length;
+					input.id = newId;
+					input.value = x[currentId];
+				});
 
-            // form.querySelector("#addMeetingTime").addEventListener('click', async () => {
-            //     const meetingTimesDiv = form.querySelector('#meetingTimes');
-            //     const meetingTimeTemplate = form.querySelector('#meetingTimeTemplate');
-              
-            //     const clonedMeetingTime = meetingTimeTemplate.cloneNode(true);
-            //     clonedMeetingTime.style.display = 'block'; 
-            //     meetingTimesDiv.appendChild(clonedMeetingTime);
-            
-            //     const inputElements = clonedMeetingTime.querySelectorAll('input');
-            //     const selectorElements = clonedMeetingTime.querySelectorAll('select');
-            
-            //     inputElements.forEach((input, index) => {
-            //         const currentId = input.id;
-            //         const newId = currentId + '_' + meetingTimesArray.length; 
-            //         input.id = newId;
-            //     });
-            //     selectorElements.forEach((input, index) => {
-            //         const currentId = input.id;
-            //         const newId = currentId + '_' + meetingTimesArray.length; 
-            //         input.id = newId;
-            //     });
-              
-            //     meetingTimesArray.push(clonedMeetingTime);
-            // });
+				meetingTimesArray.push(clonedMeetingTime);
+			});
 		});
+	} else {
+		modal.querySelector("#edit-button").style.display = "none";
+	}
 
-    } else {
-        modal.querySelector("#edit-button").style.display = "none"
-      
-    }
-
-    modal.querySelector('#read-only').style.display = "block";
-    modal.querySelector('#edit-form').style.display = "none";
-    modal.querySelector('#read-only-times').innerHTML = '';
+	modal.querySelector("#read-only").style.display = "block";
+	modal.querySelector("#edit-form").style.display = "none";
+	modal.querySelector("#read-only-times").innerHTML = "";
 	const nameHeading = modal.querySelector("[data-name]");
 	nameHeading.textContent = studyGroup.name;
 
@@ -235,22 +205,23 @@ function showModal(studyGroup) {
 	const descriptionPara = modal.querySelector("[data-description]");
 	descriptionPara.textContent = studyGroup.description;
 
-    const maxParticipants = modal.querySelector("[data-max-participants]");
-    maxParticipants.textContent = "Max Participants: " +  studyGroup.max_participants;
+	const maxParticipants = modal.querySelector("[data-max-participants]");
+	maxParticipants.textContent =
+		"Max Participants: " + studyGroup.max_participants;
 
-    studyGroup.meeting_times.forEach(meetingTime => {
-        const template = modal.querySelector("#meetingTimeDisplayTemplate");
+	studyGroup.meeting_times.forEach((meetingTime) => {
+		const template = modal.querySelector("#meetingTimeDisplayTemplate");
 		const clone = document.importNode(template.content, true);
-        const day = clone.querySelector("[data-day]");
-        const time = clone.querySelector("[data-time]");
-        const location = clone.querySelector("[data-location]");
+		const day = clone.querySelector("[data-day]");
+		const time = clone.querySelector("[data-time]");
+		const location = clone.querySelector("[data-location]");
 
-        day.textContent = meetingTime.day + " @ ";
-        time.textContent = meetingTime.time;
-        location.textContent = meetingTime.location;
+		day.textContent = meetingTime.day + " @ ";
+		time.textContent = meetingTime.time;
+		location.textContent = meetingTime.location;
 
-        modal.querySelector('#read-only-times').appendChild(clone);
-    });
+		modal.querySelector("#read-only-times").appendChild(clone);
+	});
 
 	modal.style.display = "block";
 }
@@ -269,70 +240,97 @@ window.onclick = function (event) {
 	}
 };
 
-document.querySelector("#saveGroupButton").addEventListener("click", async () => {
-	
-    const modal = document.getElementById("myModal");
-    const id = modal.value;
+document
+	.querySelector("#saveGroupButton")
+	.addEventListener("click", async () => {
+		const modal = document.getElementById("myModal");
+		const id = modal.value;
 
-	const url = `https://study-buddy-api.azurewebsites.net/studygroup/${id}`;
-    console.log(url);
-	const token = localStorage.getItem("token");
+		const url = `https://study-buddy-api.azurewebsites.net/studygroup/${id}`;
+		console.log(url);
+		const token = localStorage.getItem("token");
 
-	if (!token) {
-        console.log("No token found")
-        return
-    }
+		if (!token) {
+			console.log("No token found");
+			return;
+		}
 
-    const form = modal.querySelector('#edit-form');
+		const form = modal.querySelector("#edit-form");
+
+		let body = {
+			name: form.querySelector("#groupName").value,
+			is_public: form.querySelector("#isPublic").checked,
+			description: form.querySelector("#description").value,
+			school: form.querySelector("#school").value,
+			course_number: form.querySelector("#courseNumber").value,
+			max_participants: form.querySelector("#maxParticipants").value,
+			start_date: form.querySelector("#start").value,
+			end_date: form.querySelector("#end").value,
+			meeting_times: [
+				...meetingTimesArray.map((x) => {
+					return {
+						day: x.querySelector("#day_" + meetingTimesArray.indexOf(x)).value,
+						time: x.querySelector("#time_" + meetingTimesArray.indexOf(x))
+							.value,
+						location: x.querySelector(
+							"#location_" + meetingTimesArray.indexOf(x)
+						).value,
+					};
+				}),
+			],
+		};
+
+		body = JSON.stringify(body);
+
+		console.log(body);
+
+		const options = {
+			method: "PATCH",
+			headers: {
+				Authorization: `Bearer ${token}`,
+				"Content-Type": "application/json",
+			},
+			body,
+		};
+
+		let response = await fetch(url, options);
+
+		location.reload();
+
+		if (response.status == 200) {
+			console.log("Group creation successful");
+		} else {
+			console.log("Something went wrong.");
+		}
+	});
 
 
+const button = document.querySelector("#addMeetingTimeEdit")
+console.log(button)
+button.addEventListener("click", (ev) => {
 
-    let body = {
-		name: form.querySelector('#groupName').value,
-		is_public: form.querySelector('#isPublic').checked,
-        description: form.querySelector('#description').value,
-		school: form.querySelector('#school').value,
-        course_number: form.querySelector('#courseNumber').value,
-        max_participants: form.querySelector('#maxParticipants').value,
-        start_date: form.querySelector('#start').value,
-        end_date: form.querySelector('#end').value,
-		meeting_times: [
-            ...meetingTimesArray.map((x) => {
-                return meetingTimesArray.indexOf(x) == 0 ? {
-                    day: x.querySelector("#day").value,
-                    time: x.querySelector("#time").value,
-                    location: x.querySelector("#location").value
-                } :  {
-                    day: x.querySelector("#day_"+meetingTimesArray.indexOf(x)).value,
-                    time: x.querySelector("#time_"+meetingTimesArray.indexOf(x)).value,
-                    location: x.querySelector("#location_"+meetingTimesArray.indexOf(x)).value
-                }
-            })
-        ],
-	};
+    const form = ev.currentTarget.parentNode
+    console.log(form)
+	const meetingTimesDiv = form.querySelector("#meetingTimes");
+	const meetingTimeTemplate = form.querySelector("#meetingTimeTemplate");
 
-	body = JSON.stringify(body);
+	const clonedMeetingTime = meetingTimeTemplate.cloneNode(true);
+	clonedMeetingTime.style.display = "block";
+	meetingTimesDiv.appendChild(clonedMeetingTime);
 
-    console.log(body)
+	const inputElements = clonedMeetingTime.querySelectorAll("input");
+	const selectorElements = clonedMeetingTime.querySelectorAll("select");
 
-	const options = {
-        method: "PATCH",
-        headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json'
-        },
-        body
-    }
+	inputElements.forEach((input, index) => {
+		const currentId = input.id;
+		const newId = currentId + "_" + meetingTimesArray.length;
+		input.id = newId;
+	});
+	selectorElements.forEach((input, index) => {
+		const currentId = input.id;
+		const newId = currentId + "_" + meetingTimesArray.length;
+		input.id = newId;
+	});
 
-    let response = await fetch(url, options)
-
-    location.reload();
-
-    if (response.status == 200) {
-        console.log("Group creation successful")
-        
-    }
-    else {
-        console.log("Something went wrong.");
-    }
+	meetingTimesArray.push(clonedMeetingTime);
 });
