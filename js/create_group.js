@@ -31,8 +31,8 @@ document.querySelector("#createGroupButton").addEventListener("click", async () 
 		meeting_times: [
             ...meetingTimesArray.map((x) => {
                 return {
-                    day: x.querySelector("#dayOfWeek_"+meetingTimesArray.indexOf(x)).value,
-                    time: x.querySelector("#timeOfDay_"+meetingTimesArray.indexOf(x)).value,
+                    day: x.querySelector("#day_"+meetingTimesArray.indexOf(x)).value,
+                    time: x.querySelector("#time_"+meetingTimesArray.indexOf(x)).value,
                     location: x.querySelector("#location_"+meetingTimesArray.indexOf(x)).value
                 }
             })

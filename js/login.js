@@ -27,7 +27,7 @@ document.querySelector("#loginButton").addEventListener("click", async () => {
 		const data = await response.json()
 		console.log(data)
 		localStorage.setItem("token", data.token);
-
+		localStorage.setItem("id", data.user._id)
 		location.href = "home.html"
 
 	} else if (response.status == 401){
