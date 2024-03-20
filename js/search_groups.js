@@ -98,8 +98,8 @@ function displayResults(results) {
 		nameHeading.textContent = studyGroup.name;
 
 		const dateRange = clone.querySelector("[data-date-range]");
-		const startDate = new Date(studyGroup.start_date).toLocaleDateString();
-		const endDate = new Date(studyGroup.end_date).toLocaleDateString();
+		const startDate = new Date(Date.parse(studyGroup.start_date)).toLocaleDateString('en-US', {timeZone: 'UTC'});
+		const endDate = new Date(studyGroup.end_date).toLocaleDateString('en-US', {timeZone: 'UTC'});
 		dateRange.textContent = `${startDate} - ${endDate}`;
 
 		const descriptionPara = clone.querySelector("[data-description]");
@@ -198,8 +198,8 @@ function showModal(studyGroup) {
 	nameHeading.textContent = studyGroup.name;
 
 	const dateRange = modal.querySelector("[data-date-range]");
-	const startDate = new Date(studyGroup.start_date).toLocaleDateString();
-	const endDate = new Date(studyGroup.end_date).toLocaleDateString();
+	const startDate = new Date(studyGroup.start_date).toLocaleDateString('en-US', {timeZone: 'UTC'});
+	const endDate = new Date(studyGroup.end_date).toLocaleDateString('en-US', {timeZone: 'UTC'});
 	dateRange.textContent = `${startDate} - ${endDate}`;
 
 	const descriptionPara = modal.querySelector("[data-description]");

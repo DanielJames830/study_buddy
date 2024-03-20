@@ -339,6 +339,7 @@ body {
     float: right;
     font-size: 28px;
     font-weight: bold;
+	margin-right: 12px;
 }
 
 .close:hover,
