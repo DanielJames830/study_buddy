@@ -352,4 +352,15 @@ body {
 .edit-button {
 	display: none;
 	max-width: 200px;
+	margin-right: 12px;
+}
+
+.join-button {
+	display: inline-block;
+	max-width: 200px;
+}
+
+.pagination-button {
+	max-width: 200px;
+	margin: 24px
 }
