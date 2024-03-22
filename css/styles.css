@@ -332,6 +332,18 @@ body {
 	padding: 30px;
 	border-radius: 10px;
     width: 80%;
+	
+	
+}
+
+.modal-form {
+	background-color: transparent !important;
+	padding: 30px !important;
+	box-shadow: none;
+
+	margin-left: 15% auto;
+	width: 90%;
+	
 }
 
 .close {
