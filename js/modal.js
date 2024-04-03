@@ -23,6 +23,8 @@ export function showModal(studyGroup) {
 	if (userId == studyGroup.owner) {
 		const button = modal.querySelector("#edit-button");
 		button.style.display = "block";
+		const del_button = modal.querySelector("#delete-button");
+		del_button.style.display = "block";
 
 		button.addEventListener("click", function () {
 			meetingTimesArray = [];
@@ -60,8 +62,10 @@ export function showModal(studyGroup) {
 			studyGroup.meeting_times.forEach((x) => {
 				const meetingTimesDiv = form.querySelector("#meetingTimes");
 				const meetingTimeTemplate = form.querySelector("#meetingTimeTemplate");
+				
 
 				const clonedMeetingTime = meetingTimeTemplate.cloneNode(true);
+				clonedMeetingTime.value = meetingTimesArray.length;
 				clonedMeetingTime.style.display = "block";
 				meetingTimesDiv.appendChild(clonedMeetingTime);
 
@@ -97,8 +101,10 @@ export function showModal(studyGroup) {
 				meetingTimesArray.push(clonedMeetingTime);
 			});
 		});
+		
 	} else {
 		modal.querySelector("#edit-button").style.display = "none";
+		modal.querySelector("#delete-button").style.display = "none";
 	}
 
 	modal.querySelector("#read-only").style.display = "block";
@@ -169,12 +175,13 @@ document
 			end_date: form.querySelector("#end").value,
 			meeting_times: [
 				...meetingTimesArray.map((x) => {
+					console.log(x.value);
 					return {
-						day: x.querySelector("#day_" + meetingTimesArray.indexOf(x)).value,
-						time: x.querySelector("#time_" + meetingTimesArray.indexOf(x))
+						day: x.querySelector("#day_" + x.value).value,
+						time: x.querySelector("#time_" + x.value)
 							.value,
 						location: x.querySelector(
-							"#location_" + meetingTimesArray.indexOf(x)
+							"#location_" + x.value
 						).value,
 					};
 				}),
@@ -214,6 +221,7 @@ button.addEventListener("click", (ev) => {
 	const meetingTimeTemplate = form.querySelector("#meetingTimeTemplate");
 
 	const clonedMeetingTime = meetingTimeTemplate.cloneNode(true);
+	clonedMeetingTime.value = meetingTimesArray.length;
 	clonedMeetingTime.style.display = "block";
 	meetingTimesDiv.appendChild(clonedMeetingTime);
 

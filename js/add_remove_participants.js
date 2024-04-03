@@ -5,7 +5,7 @@ button.addEventListener("click", async (ev) => {
 	const id = modal.value;
     const mode = button.value;
 
-	const url = `https://study-buddy-api.azurewebsites.net/studygroup/${id}/manage?${mode}`;
+	const url = `https://study-buddy-api.azurewebsites.net/studygroup/${id}/participants?${mode}`;
 	console.log(url);
 	const token = localStorage.getItem("token");
 

@@ -224,9 +224,11 @@
             <span class="close">&times;</span>
             <span>
                 <div class="sidebyside">
-                    <button id="edit-button" class="edit-button">Edit</button>
+                <button id="edit-button" class="edit-button">Edit</button>
+                <button id="delete-button" class="delete-button">Delete</button>
                 <button id="join-button" class="join-button">Join</button>
                 <script type="module" src="js/add_remove_participants.js"></script>
+                <script type="module" src="js/delete_group.js"></script>
                 </div>
             </span>
             <div id="read-only">
@@ -332,6 +334,16 @@
             </div>
         </div>
 
+        <div id="yesno" class="confirm-modal">
+            <div class="confirm-modal-content">
+              <p>Do you want to proceed?</p>
+              <p>This cannot be undone.</p>
+                <div class="sidebyside">
+                    <button class="btn yes-btn" onclick="chooseOption(true)">Yes</button>
+                    <button class="btn no-btn" onclick="chooseOption(false)">No</button>
+                </div>
+            </div>
+        </div>
 
     </div>
 </body>

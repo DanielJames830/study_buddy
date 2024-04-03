@@ -1,4 +1,3 @@
-
 body {
 	font-family: Arial, sans-serif;
 	background-color: #121212;
@@ -49,7 +48,7 @@ input[type="text"] {
 	box-sizing: border-box;
 }
 
-select{
+select {
 	width: 100%;
 	padding: 10px;
 	border: 1px solid #666666;
@@ -108,7 +107,7 @@ input[type="submit"]:hover {
 
 .tab {
 	display: none;
-  }
+}
 
 .tab-link {
 	background-color: transparent;
@@ -116,16 +115,14 @@ input[type="submit"]:hover {
 	color: rgb(93, 139, 219);
 	width: 30%;
 	text-align: start;
-	
 }
 
-.meetingTime{
+.meetingTime {
 	border: 1px solid #666666;
 	border-radius: 5px;
 	padding: 10px;
 	margin-top: 5px;
 	box-sizing: border-box;
-
 }
 
 h1 {
@@ -253,47 +250,47 @@ body {
 }
 
 .search-container {
-    display: flex;
-    align-items: center;
-    background-color: #333; /* Slightly lighter dark shade for the search box */
-    border-radius: 20px;
-    padding: 5px 10px;
-  }
+	display: flex;
+	align-items: center;
+	background-color: #333; /* Slightly lighter dark shade for the search box */
+	border-radius: 20px;
+	padding: 5px 10px;
+}
 
-  .search-container input[type="text"] {
-    background-color: transparent;
-    border: none;
-    color: white; /* Light text color for contrast */
-    outline: none;
-    padding: 10px;
-    width: 40vw;
-  }
+.search-container input[type="text"] {
+	background-color: transparent;
+	border: none;
+	color: white; /* Light text color for contrast */
+	outline: none;
+	padding: 10px;
+	width: 40vw;
+}
 
-  .search-container button {
-    background-color: #007BFF; /* Bright color for the button to stand out */
-    border: none;
-    border-radius: 100px;
-    color: white;
-    cursor: pointer;
-    padding: 10px;
+.search-container button {
+	background-color: #007bff; /* Bright color for the button to stand out */
+	border: none;
+	border-radius: 100px;
+	color: white;
+	cursor: pointer;
+	padding: 10px;
 	width: 100px;
-    margin-left: 5px;
-  }
+	margin-left: 5px;
+}
 
-  .search-container button:hover {
-    background-color: #0056b3; /* Darker shade of button color on hover */
-  }
+.search-container button:hover {
+	background-color: #0056b3; /* Darker shade of button color on hover */
+}
 
-  .search-container input::placeholder {
-    color: #aaa; /* Light placeholder text */
-  }
+.search-container input::placeholder {
+	color: #aaa; /* Light placeholder text */
+}
 
-  .searchResults {
+.searchResults {
 	min-width: 600px;
 	align-items: center;
-  }
+}
 
-  .resultCard {
+.resultCard {
 	margin: 20px;
 	background-color: #333333;
 	padding: 30px;
@@ -301,7 +298,7 @@ body {
 	width: 400px;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 
-	h1{
+	h1 {
 		font-size: x-large;
 		margin: 0px;
 	}
@@ -310,30 +307,27 @@ body {
 		color: #666666;
 		margin: 0px;
 	}
-  }
-  
+}
+
 .modal {
-    display: none; 
-    position: fixed; 
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%; 
-    height: 100%; 
-    overflow: auto; 
-    background-color: rgb(0,0,0); 
-    background-color: rgba(0,0,0,0.4); 
+	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgb(0, 0, 0);
+	background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal-content {
-	
-    background-color: #333333;
-    margin: 15% auto;
+	background-color: #333333;
+	margin: 15% auto;
 	padding: 30px;
 	border-radius: 10px;
-    width: 80%;
-	
-	
+	width: 80%;
 }
 
 .modal-form {
@@ -343,40 +337,46 @@ body {
 
 	margin-left: 15% auto;
 	width: 90%;
-	
 }
 
 .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
 	margin-right: 12px;
 }
 
 .close:hover,
 .close:focus {
-    color: white;
-    text-decoration: none;
-    cursor: pointer;
+	color: white;
+	text-decoration: none;
+	cursor: pointer;
 }
 
 .close-time {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+	color: #aaa;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
 	margin-right: 12px;
 }
 
 .close-time:hover,
 .close-time:focus {
-    color: white;
-    text-decoration: none;
-    cursor: pointer;
+	color: white;
+	text-decoration: none;
+	cursor: pointer;
 }
 
 .edit-button {
+	display: none;
+	max-width: 200px;
+	margin-right: 12px;
+}
+
+.delete-button {
+	background-color: rgb(215, 31, 31) !important;
 	display: none;
 	max-width: 200px;
 	margin-right: 12px;
@@ -389,5 +389,48 @@ body {
 
 .pagination-button {
 	max-width: 200px;
-	margin: 24px
+	margin: 24px;
+}
+
+.confirm-modal {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgb(0, 0, 0);
+	background-color: rgba(0, 0, 0, 0.4);
+}
+
+.confirm-modal-content {
+	background-color: #333333;
+	margin: 15% auto;
+	padding: 30px;
+	border-radius: 10px;
+	width: 80%;
+	text-align: center;
+}
+
+.btn {
+	background-color: #4caf50;
+	color: white;
+	padding: 10px 20px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	margin: 4px 12px;
+	cursor: pointer;
+	border-radius: 4px;
+}
+
+.yes-btn {
+	background-color: #4caf50;
+}
+
+.no-btn {
+	background-color: #f44336;
 }
