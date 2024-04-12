@@ -1,9 +1,12 @@
 let meetingTimesArray = [];
-export function showModal(studyGroup) {
+export async function showModal(studyGroup) {
 	const userId = localStorage.getItem("id");
+	const token = localStorage.getItem("token");
 
 	const modal = document.getElementById("myModal");
 	modal.value = studyGroup._id;
+
+	
 
 	if (studyGroup.participants.includes(userId)) {
 		const button = modal.querySelector("#join-button");
@@ -58,6 +61,7 @@ export function showModal(studyGroup) {
 
 			const courseNumberField = form.querySelector("#courseNumber");
 			courseNumberField.value = studyGroup.course_number;
+			
 
 			studyGroup.meeting_times.forEach((x) => {
 				const meetingTimesDiv = form.querySelector("#meetingTimes");
@@ -113,6 +117,40 @@ export function showModal(studyGroup) {
 	const nameHeading = modal.querySelector("[data-name]");
 	nameHeading.textContent = studyGroup.name;
 
+	const owner = modal.querySelector("[data-owner]");
+	const participants = modal.querySelector("[data-participants]");
+	const participantsUrl = `https://study-buddy-api.azurewebsites.net/studygroup/${studyGroup._id}/participants`;
+	try {
+		const response = await fetch(participantsUrl, {
+			method: "GET",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${token}`,
+			},
+		});
+
+		if (!response.ok) {
+			throw new Error("Failed to fetch participants");
+		}
+
+		
+
+		const data = await response.json();
+		console.log(data)
+		console.log(owner)
+
+		owner.textContent = 'Owner: ' + data['owner'];
+
+		if(data['participants'] != null){
+			participants.textContent = 'Participants: ' + data['participants'];
+		}
+		
+	
+		
+	} catch (error) {
+		console.error("Error:", error);
+	}
+
 	const dateRange = modal.querySelector("[data-date-range]");
 	const startDate = new Date(studyGroup.start_date).toLocaleDateString(
 		"en-US",
@@ -130,7 +168,7 @@ export function showModal(studyGroup) {
 	maxParticipants.textContent =
 		"Max Participants: " + studyGroup.max_participants;
 
-	studyGroup.meeting_times.forEach((meetingTime) => {
+	studyGroup.meeting_times.forEach(async (meetingTime) => {
 		const template = modal.querySelector("#meetingTimeDisplayTemplate");
 		const clone = document.importNode(template.content, true);
 		const day = clone.querySelector("[data-day]");
@@ -138,6 +176,8 @@ export function showModal(studyGroup) {
 		const location = clone.querySelector("[data-location]");
 
 		day.textContent = meetingTime.day + " @ ";
+		
+		
 		time.textContent = meetingTime.time;
 		location.textContent = meetingTime.location;
 
