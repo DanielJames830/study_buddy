@@ -13,7 +13,7 @@
         <a id="newGroupLink" href="javascript:void(0);" onclick="changeContent('newGroup')">New Group</a>
         <a id="searchGroupsLink" href="javascript:void(0);" onclick="changeContent('searchGroups')">Search Groups</a>
         <a id="myGroupsLink" href="javascript:void(0);" onclick="changeContent('myGroups')">My Groups</a>
-
+        <a id="notificationsLink" href="javascript:void(0);" onclick="changeContent('notifications')">Notifications</a>
         <button class="logout-button" id="logoutButton">Logout</button>
     </div>
 
@@ -192,31 +192,56 @@
                         <div class="searchResults" id="joined-groups"></div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div id="notifications" style="display: none;">
+            <script type="module" src="js/get_notifications.js"></script>
+            <div>
+                <template id="notificationCardTemplate">
+                    <div class="notificationCard">
+                        <h1 data-sender></h1>
+                        <br>
+                        <div style="display: flex;">
+                            <p>Subject: "</p>
+                            <p data-subject></p>
+                        </div>
+                        <br>
+                        <div style="display: flex;">
+                            <p>Body: "</p>
+                            <p data-body></p>
+                        </div>
+                    </div>
+                </template>
+
+                <div>
+                    <h1>Notifications</h1>
+                    <div class="searchResults" id="my_notifications"></div>
                 </div>
             </div>
         </div>
+    </div>
 
 
-        <script>
-            // Function to toggle content based on the selected link
-            function changeContent(selectedSectionId) {
-                // Hide all sections
-                document.querySelectorAll('.main > div').forEach(section => {
-                    section.style.display = 'none';
-                });
+    <script>
+        // Function to toggle content based on the selected link
+        function changeContent(selectedSectionId) {
+            // Hide all sections
+            document.querySelectorAll('.main > div').forEach(section => {
+                section.style.display = 'none';
+            });
 
-                // Show the selected section
-                document.getElementById(selectedSectionId).style.display = 'block';
+            // Show the selected section
+            document.getElementById(selectedSectionId).style.display = 'block';
 
-                // Update the active link styling
-                document.querySelectorAll('.sidenav a').forEach(link => {
-                    link.classList.remove('active');
-                });
-                document.getElementById(selectedSectionId + 'Link').classList.add('active');
-            }
-        </script>
-        <script type="module" src="js/logout.js"></script>
-        <script type="module" src="js/create_group.js"> </script>
+            // Update the active link styling
+            document.querySelectorAll('.sidenav a').forEach(link => {
+                link.classList.remove('active');
+            });
+            document.getElementById(selectedSectionId + 'Link').classList.add('active');
+        }
+    </script>
+    <script type="module" src="js/logout.js"></script>
+    <script type="module" src="js/create_group.js"> </script>
     </div>
 
     <div id="myModal" class="modal">
@@ -224,11 +249,11 @@
             <span class="close">&times;</span>
             <span>
                 <div class="sidebyside">
-                <button id="edit-button" class="edit-button">Edit</button>
-                <button id="delete-button" class="delete-button">Delete</button>
-                <button id="join-button" class="join-button">Join</button>
-                <script type="module" src="js/add_remove_participants.js"></script>
-                <script type="module" src="js/delete_group.js"></script>
+                    <button id="edit-button" class="edit-button">Edit</button>
+                    <button id="delete-button" class="delete-button">Delete</button>
+                    <button id="join-button" class="join-button">Join</button>
+                    <script type="module" src="js/add_remove_participants.js"></script>
+                    <script type="module" src="js/delete_group.js"></script>
                 </div>
             </span>
             <div id="read-only">
@@ -253,8 +278,8 @@
                 <form class="modal-form" onsubmit="return false">
                     <div class="form-group">
                         <label for="name">Name</label>
-                        <input type="text" id="groupName" name="groupName" spellcheck="false"
-                            placeholder="Name" required>
+                        <input type="text" id="groupName" name="groupName" spellcheck="false" placeholder="Name"
+                            required>
                     </div>
                     <div class="form-group">
                         <label for="isPublic">Public?</label>
@@ -262,8 +287,8 @@
                     </div>
                     <div class="form-group">
                         <label for="maxParticipants">Maximum Participants</label>
-                        <input type="number" id="maxParticipants" name="maxParticipants"
-                            spellcheck="false" placeholder="8" required>
+                        <input type="number" id="maxParticipants" name="maxParticipants" spellcheck="false"
+                            placeholder="8" required>
                     </div>
                     <div class="form-group">
                         <label for="description">Description</label>
@@ -310,8 +335,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="time">Time of Day (Military)</label>
-                                    <input type="time" id="time" name="time"
-                                        spellcheck="false" placeholder="8" required>
+                                    <input type="time" id="time" name="time" spellcheck="false" placeholder="8"
+                                        required>
                                 </div>
                             </div>
                             <div class="form-group">
@@ -324,7 +349,7 @@
                     <button type="button" class="meetingTimeButton" id="addMeetingTimeEdit">New Meeting
                         Time</button>
                     <div id="meetingTimes">
-                        
+
                     </div>
                     <br>
                     <br>
@@ -338,12 +363,37 @@
 
         <div id="yesno" class="confirm-modal">
             <div class="confirm-modal-content">
-              <p>Do you want to proceed?</p>
-              <p>This cannot be undone.</p>
+                <p>Do you want to proceed?</p>
+                <p>This cannot be undone.</p>
                 <div class="sidebyside">
                     <button class="btn yes-btn" onclick="chooseOption(true)">Yes</button>
                     <button class="btn no-btn" onclick="chooseOption(false)">No</button>
                 </div>
+            </div>
+        </div>
+
+        <div id="message" class="message-modal">
+            <div class="message-modal-content">
+
+                <div style="display: flex;">
+                    <p>Send message to :</p>
+                    <p data-participant></p>
+                </div>
+                
+                <form class="modal-form" onsubmit="return false">
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="body">Body</label>
+                        <textarea cols="40" rows="5" id="body" height="200px"></textarea>
+                    </div>
+
+                    <button id="sendMessageButton">Send</button>
+                    <script type="module" src="js/send_notification.js"></script>
+                </form>
             </div>
         </div>
 

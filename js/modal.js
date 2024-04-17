@@ -6,8 +6,6 @@ export async function showModal(studyGroup) {
 	const modal = document.getElementById("myModal");
 	modal.value = studyGroup._id;
 
-	
-
 	if (studyGroup.participants.includes(userId)) {
 		const button = modal.querySelector("#join-button");
 		button.innerHTML = "Leave";
@@ -61,12 +59,10 @@ export async function showModal(studyGroup) {
 
 			const courseNumberField = form.querySelector("#courseNumber");
 			courseNumberField.value = studyGroup.course_number;
-			
 
 			studyGroup.meeting_times.forEach((x) => {
 				const meetingTimesDiv = form.querySelector("#meetingTimes");
 				const meetingTimeTemplate = form.querySelector("#meetingTimeTemplate");
-				
 
 				const clonedMeetingTime = meetingTimeTemplate.cloneNode(true);
 				clonedMeetingTime.value = meetingTimesArray.length;
@@ -105,7 +101,6 @@ export async function showModal(studyGroup) {
 				meetingTimesArray.push(clonedMeetingTime);
 			});
 		});
-		
 	} else {
 		modal.querySelector("#edit-button").style.display = "none";
 		modal.querySelector("#delete-button").style.display = "none";
@@ -133,20 +128,36 @@ export async function showModal(studyGroup) {
 			throw new Error("Failed to fetch participants");
 		}
 
-		
-
 		const data = await response.json();
-		console.log(data)
-		console.log(owner)
+		console.log(data);
+		console.log(owner);
 
-		owner.textContent = 'Owner: ' + data['owner'];
+		owner.textContent = "Owner: " + data["owner"];
 
-		if(data['participants'] != null){
-			participants.textContent = 'Participants: ' + data['participants'];
+		if (data["participants"] != null) {
+			participants.textContent = "Participants:\n";
+``
+			participants;
+
+			data["participants"].map((participant) => {
+				let b = document.createElement("button");
+				b.id = participant["_id"];
+
+				b.addEventListener("click",(event) => {
+					const modal = document.getElementById('message');
+      				modal.style.display = 'block';
+					modal.value = participant["_id"];
+
+					const nameHeading = modal.querySelector("[data-participant]");
+					nameHeading.textContent = ` ${participant['username']}`
+				});
+
+
+				b.innerHTML = participant["username"];
+
+				participants.after(b);
+			});
 		}
-		
-	
-		
 	} catch (error) {
 		console.error("Error:", error);
 	}
@@ -176,8 +187,7 @@ export async function showModal(studyGroup) {
 		const location = clone.querySelector("[data-location]");
 
 		day.textContent = meetingTime.day + " @ ";
-		
-		
+
 		time.textContent = meetingTime.time;
 		location.textContent = meetingTime.location;
 
@@ -218,11 +228,8 @@ document
 					console.log(x.value);
 					return {
 						day: x.querySelector("#day_" + x.value).value,
-						time: x.querySelector("#time_" + x.value)
-							.value,
-						location: x.querySelector(
-							"#location_" + x.value
-						).value,
+						time: x.querySelector("#time_" + x.value).value,
+						location: x.querySelector("#location_" + x.value).value,
 					};
 				}),
 			],
