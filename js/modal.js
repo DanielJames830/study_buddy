@@ -177,7 +177,7 @@ export async function showModal(studyGroup) {
 
 	const maxParticipants = modal.querySelector("[data-max-participants]");
 	maxParticipants.textContent =
-		"Max Participants: " + studyGroup.max_participants;
+		studyGroup.participants.length + "/" + studyGroup.max_participants + " Participants";
 
 	studyGroup.meeting_times.forEach(async (meetingTime) => {
 		const template = modal.querySelector("#meetingTimeDisplayTemplate");

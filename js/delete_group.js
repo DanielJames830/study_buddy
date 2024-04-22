@@ -48,6 +48,8 @@ button.addEventListener("click", async (ev) => {
 function waitForResponse() {
     return new Promise(resolve => {
       const modal = document.getElementById('yesno');
+	  const modalTitle = modal.querySelector("[data-modal-title]");
+	  modalTitle.textContent = "";
       modal.style.display = 'block';
   
       window.chooseOption = function(option) {
