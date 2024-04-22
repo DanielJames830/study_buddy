@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="css/styles.css">
+    <title>The Study Buddy</title>
+</head>
+
+<body>
+    <div class="sidenav">
+        <a id="newGroupLink" href="new_group.html">New Group</a>
+        <a id="searchGroupsLink" href="search_groups.html">Search Groups</a>
+        <a class="active" id="myGroupsLink" href="my_groups.html">My Groups</a>
+        <a id="notificationsLink" href="notifications.html">Notifications</a>
+        <button class="logout-button" id="logoutButton">Logout</button>
+        <script type="module" src="js/logout.js"></script>
+    </div>
+
+    <div class="main">
+        <div id="myGroups" style="display: block;">
+            <script type="module" src="js/my_groups.js"></script>
+            <div>
+                <template id="resultCardTemplate">
+                    <div class="resultCard">
+                        <h1 data-name></h1>
+                        <p data-date-range></p>
+                        <p data-description></p>
+                    </div>
+                </template>
+                <div class="sidebyside">
+                    <div>
+                        <h1>Owned Groups</h1>
+                        <div class="searchResults" id="owned-groups"></div>
+                    </div>
+                    <div>
+                        <h1>Joined Groups</h1>
+                        <div class="searchResults" id="joined-groups"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <span>
+                <div class="sidebyside">
+                    <button id="edit-button" class="edit-button">Edit</button>
+                    <button id="delete-button" class="delete-button">Delete</button>
+                    <button id="join-button" class="join-button">Join</button>
+                    <script type="module" src="js/add_remove_participants.js"></script>
+                    <script type="module" src="js/delete_group.js"></script>
+                </div>
+            </span>
+            <div id="read-only">
+                <h1 data-name></h1>
+                <p data-owner></p>
+                <p data-date-range></p>
+                <p data-max-participants></p>
+                <p data-participants></p>
+                <p data-description></p>
+                <div id="read-only-times"></div>
+            </div>
+            <template id="meetingTimeDisplayTemplate">
+                <div class="meetingTime">
+                    <div class="sidebyside">
+                        <p data-day></p>
+                        <p data-time></p>
+                    </div>
+                    <p data-location></p>
+                </div>
+            </template>
+            <div id="edit-form">
+                <form class="modal-form" onsubmit="return false">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="groupName" name="groupName" spellcheck="false" placeholder="Name"
+                            required>
+                    </div>
+                    <div class="form-group">
+                        <label for="isPublic">Public?</label>
+                        <input type="checkbox" id="isPublic" name="isPublic" placeholder="true">
+                    </div>
+                    <div class="form-group">
+                        <label for="maxParticipants">Maximum Participants</label>
+                        <input type="number" id="maxParticipants" name="maxParticipants" spellcheck="false"
+                            placeholder="8" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <input type="text" id="description" name="description" spellcheck="false"
+                            placeholder="Description" required>
+                    </div>
+
+                    <div class="sidebyside">
+                        <div class="form-group">
+                            <label for="start">Start date</label>
+                            <input type="date" id="start" name="start" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="end">End date</label>
+                            <input type="date" id="end" name="start" required>
+                        </div>
+                    </div>
+
+                    <div class="sidebyside">
+                        <div class="form-group">
+                            <label for="school">School</label>
+                            <input type="text" id="school" name="school" spellcheck="false" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="courseNumber">Course Number</label>
+                            <input type="text" id="courseNumber" name="courseNumber" spellcheck="false">
+                        </div>
+                    </div>
+                    <div id="meetingTimeTemplate" style="display: none;">
+                        <div class="meetingTime">
+                            <span id="delete" class="close-time">&times;</span>
+                            <div class="sidebyside">
+                                <div class="form-group">
+                                    <label for="day">Day of Week</label>
+                                    <select name="day" id="day">
+                                        <option value="Sunday">Sunday</option>
+                                        <option value="Monday">Monday</option>
+                                        <option value="Tuesday">Tuesday</option>
+                                        <option value="Wednesday">Wednesday</option>
+                                        <option value="Thursday">Thursday</option>
+                                        <option value="Friday">Friday</option>
+                                        <option value="Saturday">Saturday</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="time">Time of Day (Military)</label>
+                                    <input type="time" id="time" name="time" spellcheck="false" placeholder="8"
+                                        required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="location">Location</label>
+                                <input type="text" id="location" name="location" spellcheck="false"
+                                    placeholder="Location" required>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="meetingTimeButton" id="addMeetingTimeEdit">New Meeting
+                        Time</button>
+                    <div id="meetingTimes">
+
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+                    <button id="saveGroupButton">Save</button>
+                    <script type="module" src="js/edit_group.js"> </script>
+                    <a href="home.html">Nevermind</a>
+                </form>
+            </div>
+        </div>
+
+        <div id="yesno" class="confirm-modal">
+            <div class="confirm-modal-content">
+                <h3 data-modal-title></h3>
+                <p>Do you want to proceed?</p>
+                <p>This cannot be undone.</p>
+                <div class="sidebyside">
+                    <button class="btn yes-btn" onclick="chooseOption(true)">Yes</button>
+                    <button class="btn no-btn" onclick="chooseOption(false)">No</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="message" class="message-modal">
+            <div class="message-modal-content">
+
+                <div style="display: flex;">
+                    <p>Send message to :</p>
+                    <p data-participant></p>
+                </div>
+                
+                <form class="modal-form" onsubmit="return false">
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" id="subject">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="body">Body</label>
+                        <textarea cols="40" rows="5" id="body" height="200px"></textarea>
+                    </div>
+
+                    <button id="sendMessageButton">Send</button>
+                    <script type="module" src="js/send_notification.js"></script>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</body>

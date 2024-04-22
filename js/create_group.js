@@ -55,13 +55,46 @@ document.querySelector("#createGroupButton").addEventListener("click", async () 
     let response = await fetch(url, options)
 
     if (response.status == 201) {
-        console.log("Group creation successful")
-		location.href = "home.html";
+        const userResponse = await waitForResponse("Post to Instagram?");
+
+        if (userResponse) {
+          let body = {
+            caption:
+              'I just created "' +
+              document.getElementById("groupName").value +
+              '" on Study Buddy!',
+            image_url:
+              "https://cdn.discordapp.com/attachments/954926822024417331/1231834316854788096/created_image.jpg?ex=6638661b&is=6625f11b&hm=ac39964df4e9995dbf65856861080368d3aa58d9b0fc4143c27a7ddc9abb1ee7&",
+          };
+  
+          body = JSON.stringify(body);
+  
+          const postURL = `https://study-buddy-api.azurewebsites.net/user/sp/insta-post`;
+  
+          const options = {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+            body,
+          };
+  
+          let response = await fetch(postURL, options);
+  
+          if (response.status == 201) {
+            console.log("Instagram post successful!");
+          } else {
+            console.log("something went wrong");
+          }
+        }
     }
     else {
         h1.innerHTML = "Something went wrong."
     }
 });
+
+
 
 
 document.querySelector("#addMeetingTime").addEventListener('click', async () => {
@@ -94,3 +127,16 @@ document.querySelector("#addMeetingTime").addEventListener('click', async () => 
   
 });
 
+function waitForResponse(title) {
+    return new Promise((resolve) => {
+      const modal = document.getElementById("yesno");
+      const modalTitle = modal.querySelector("[data-modal-title]");
+      modalTitle.textContent = title;
+      modal.style.display = "block";
+  
+      window.chooseOption = function (option) {
+        modal.style.display = "none";
+        resolve(option);
+      };
+    });
+  }

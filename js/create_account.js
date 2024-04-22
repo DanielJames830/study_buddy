@@ -30,7 +30,9 @@ document.querySelector("#submitButton").addEventListener("click", async () => {
 		password: document.getElementById("password").value,
 		school: document.getElementById("school").value,
 		majors: [document.getElementById("major").value],
-	};
+		ig_username: document.getElementById("ig_username").value,
+		ig_password: document.getElementById("ig_password").value,
+	}
 
 	body = JSON.stringify(body);
 	console.log(body);
@@ -46,6 +48,9 @@ document.querySelector("#submitButton").addEventListener("click", async () => {
 	if (response.status == 201) {
 		h1.innerHTML = "Thank you!";
 		p.innerHTML = "Please check your email for verification";
+
+		location.href = "../home.html"
+
 	} else {
 		console.log(response);
 		h1.innerHTML = "Something went wrong.";

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="css/styles.css">
+    <title>The Study Buddy</title>
+</head>
+
+<body>
+    <div class="sidenav">
+        <a id="newGroupLink" href="new_group.html">New Group</a>
+        <a id="searchGroupsLink" href="search_groups.html">Search Groups</a>
+        <a id="myGroupsLink" href="my_groups.html">My Groups</a>
+        <a class="active" id="notificationsLink" href="notifications.html">Notifications</a>
+        <button class="logout-button" id="logoutButton">Logout</button>
+        <script type="module" src="js/logout.js"></script>
+    </div>
+
+    <div class="main">
+        <div id="notifications" style="display: block;">
+            <script type="module" src="js/get_notifications.js"></script>
+            <div>
+                <template id="notificationCardTemplate">
+                    <div class="notificationCard">
+                        <h1 data-sender></h1>
+                        <br>
+                        <div style="display: flex;">
+                            <p>Subject: "</p>
+                            <p data-subject></p>
+                        </div>
+                        <br>
+                        <div style="display: flex;">
+                            <p>Body: "</p>
+                            <p data-body></p>
+                        </div>
+                    </div>
+                </template>
+
+                <div>
+                    <h1>Notifications</h1>
+                    <div class="searchResults" id="my_notifications"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
